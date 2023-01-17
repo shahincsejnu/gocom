@@ -11,6 +11,8 @@ import (
 	sqlcdb "github.com/shahincsejnu/gocom/auth/infra/sqlc"
 
 	_ "github.com/lib/pq"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -55,8 +57,12 @@ func main() {
 }
 
 func newSQLC() (*sqlcdb.Queries, error) {
+	err := godotenv.Load(".env")
+	if err != nil {
+		return nil, err
+	}
+
 	dbUrl := os.Getenv("DATABASE_URL")
-	dbUrl = "postgresql://gocom:gocom123@127.0.0.1/gocomdb?sslmode=disable" // just for now made it hard-coded
 	if dbUrl == "" {
 		return nil, errors.New("databse url env is not set")
 	}
