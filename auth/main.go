@@ -1,21 +1,16 @@
 package main
 
 import (
-	"database/sql"
-	"errors"
-	"fmt"
 	"log"
 	"net/http"
-	"os"
-	"time"
 
 	"github.com/gin-gonic/gin"
-	sqlcdb "github.com/shahincsejnu/gocom/auth/infra/sqlc"
 
 	_ "github.com/lib/pq"
 
-	"github.com/joho/godotenv"
 	"github.com/shahincsejnu/gocom/auth/presenter/healthcheck"
+	"github.com/shahincsejnu/gocom/auth/presenter/signup"
+	signupuc "github.com/shahincsejnu/gocom/auth/usecase/signup"
 )
 
 func main() {
@@ -35,47 +30,23 @@ func run() error {
 }
 
 func newServer() (*http.Server, error) {
-	gin.SetMode(gin.ReleaseMode)
-	r := gin.Default()
-
-	r.GET("/", healthcheck.Handler())
-
-	return &http.Server{Addr: ":8080", Handler: r}, nil
-}
-
-func newSQLC() (*sqlcdb.Queries, error) {
-	err := godotenv.Load(".env")
+	c, err := newDIContainer()
 	if err != nil {
 		return nil, err
 	}
 
-	dbUrl := os.Getenv("DATABASE_URL")
-	if dbUrl == "" {
-		return nil, errors.New("databse url env is not set")
-	}
+	gin.SetMode(gin.ReleaseMode)
+	r := gin.Default()
 
-	db, err := sql.Open("postgres", dbUrl)
+	err = c.Invoke(func(
+		signupuc *signupuc.Usecase,
+	) {
+		r.GET("/", healthcheck.Handler())
+		r.POST("/signup", signup.Handler(signupuc))
+	})
 	if err != nil {
-		return nil, errors.New("couldn't open the DB, because:" + err.Error())
+		return nil, err
 	}
 
-	var counter int
-	for {
-		if counter == 30 {
-			return nil, errors.New("reached maximum number of attempt to connect the DB")
-		}
-
-		fmt.Println("attempt to connect the DB, counter:", counter)
-		err = db.Ping()
-		if err == nil {
-			break
-		}
-
-		time.Sleep(time.Second)
-		counter++
-	}
-
-	queries := sqlcdb.New(db)
-
-	return queries, nil
+	return &http.Server{Addr: ":8080", Handler: r}, nil
 }
