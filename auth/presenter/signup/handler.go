@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/shahincsejnu/gocom/auth/usecase/signup"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type request struct {
@@ -23,25 +24,37 @@ func Handler(uc *signup.Usecase) gin.HandlerFunc {
 		r := new(request)
 
 		if err := c.ShouldBindJSON(&r); err != nil {
-			c.JSON(http.StatusBadRequest, &response{
-				OK:      false,
-				Message: err.Error(),
-			})
+			returnSignupResponse(c, http.StatusBadRequest, false, err.Error())
 			return
 		}
 
-		err := uc.Do(c, r.Name, r.Email, r.Password)
+		hashPass, err := hashifyPass(r.Password)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, &response{
-				OK:      false,
-				Message: err.Error(),
-			})
+			returnSignupResponse(c, http.StatusBadRequest, false, err.Error())
+			return
+		}
+		err = uc.Do(c, r.Name, r.Email, hashPass)
+		if err != nil {
+			returnSignupResponse(c, http.StatusBadRequest, false, err.Error())
 			return
 		}
 
-		c.JSON(http.StatusOK, &response{
-			OK:      true,
-			Message: "Successfully Signedup",
-		})
+		returnSignupResponse(c, http.StatusOK, true, "Successfully Signed Up!")
 	}
+}
+
+func hashifyPass(password string) (string, error) {
+	hashPass, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return "", err
+	}
+
+	return string(hashPass), nil
+}
+
+func returnSignupResponse(c *gin.Context, statusCode int, ok bool, message string) {
+	c.JSON(statusCode, &response{
+		OK:      ok,
+		Message: message,
+	})
 }
