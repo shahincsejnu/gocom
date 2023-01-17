@@ -16,4 +16,13 @@ services:
       - "5432"
     volumes:
       - ./schemas/local-data/db/gocomdb:/var/lib/postgresql/data
-
+  auth:
+    build:
+      context: auth
+      dockerfile: docker/Dockerfile
+    ports:
+      - 8084:8080
+    environment:
+      DATABASE_URL: postgresql://gocom:gocom123@gocomdb:5432/gocomdb?sslmode=disable
+    depends_on:
+      - db

@@ -8,7 +8,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/joho/godotenv"
 	sqlcdb "github.com/shahincsejnu/gocom/auth/infra/sqlc"
 	userpersistence "github.com/shahincsejnu/gocom/auth/persistence/user"
 	"github.com/shahincsejnu/gocom/auth/usecase/signup"
@@ -43,11 +42,6 @@ func newSignupUsecase(ur *userpersistence.Repository) *signup.Usecase {
 }
 
 func newSQLC() (*sqlcdb.Queries, error) {
-	err := godotenv.Load(".env")
-	if err != nil {
-		return nil, err
-	}
-
 	dburl := os.Getenv("DATABASE_URL")
 	if dburl == "" {
 		return nil, errors.New("database url env is not set")
@@ -70,7 +64,7 @@ func newSQLC() (*sqlcdb.Queries, error) {
 			break
 		}
 
-		log.Fatal("attempt connecting to database failed, will be repeated in one second", "err", err)
+		log.Println("attempt connecting to database failed, will be repeated in one second", "err", err)
 		time.Sleep(time.Second)
 		counter++
 	}
