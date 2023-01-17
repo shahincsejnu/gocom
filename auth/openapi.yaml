@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: Auth Service
+  description: Service for internal authorization in gocom.
+  contact:
+    name: gocom
+    url: 'https://github.com/shahincsejnu/gocom'
+    email: gocom@gmail.com
+servers:
+  - url: 'http://localhost:8084'
+    description: local
+tags:
+  - name: Authorization
+paths:
+  '/':
+    GET:
+      summary: Healthcheck.
+      description: Healthcheck.
+      operationId: healthcheck
+      tags:
+        - Healthcheck
+      responses:
+        '200':
+          description: Healthcheck succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  serviceName:
+                    type: string
+                    example: AuthService
+                required:
+                  - ok
+                  - serviceName

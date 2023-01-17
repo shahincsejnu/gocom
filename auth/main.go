@@ -1,59 +1,46 @@
 package main
 
 import (
-	"context"
 	"database/sql"
 	"errors"
 	"fmt"
+	"log"
+	"net/http"
 	"os"
 	"time"
 
+	"github.com/gin-gonic/gin"
 	sqlcdb "github.com/shahincsejnu/gocom/auth/infra/sqlc"
 
 	_ "github.com/lib/pq"
 
 	"github.com/joho/godotenv"
+	"github.com/shahincsejnu/gocom/auth/presenter/healthcheck"
 )
 
 func main() {
-	fmt.Println("Hello from auth!")
+	if err := run(); err != nil {
+		panic(err)
+	}
+}
 
-	db, err := newSQLC()
+func run() error {
+	server, err := newServer()
 	if err != nil {
-		fmt.Println(err.Error())
-		return
+		return err
 	}
 
-	users, err := db.GetUsers(context.TODO())
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
+	log.Println("server is running")
+	return server.ListenAndServe()
+}
 
-	fmt.Println("Numbers of users are:", len(users))
+func newServer() (*http.Server, error) {
+	gin.SetMode(gin.ReleaseMode)
+	r := gin.Default()
 
-	arg := sqlcdb.CreateUserParams{
-		ID:       "4e600115-a406-4cab-ad08-9d6b2364a481",
-		Name:     "Sha",
-		Email:    "sha@gmail.com",
-		Password: "123",
-	}
-	err = db.CreateUser(context.TODO(), arg)
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
+	r.GET("/", healthcheck.Handler())
 
-	fmt.Println("Create success!")
-
-	users, err = db.GetUsers(context.TODO())
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
-
-	fmt.Println("Numbers of users are:", len(users))
-	fmt.Println(users)
+	return &http.Server{Addr: ":8080", Handler: r}, nil
 }
 
 func newSQLC() (*sqlcdb.Queries, error) {
