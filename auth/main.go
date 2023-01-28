@@ -9,7 +9,9 @@ import (
 	_ "github.com/lib/pq"
 
 	"github.com/shahincsejnu/gocom/auth/presenter/healthcheck"
+	"github.com/shahincsejnu/gocom/auth/presenter/login"
 	"github.com/shahincsejnu/gocom/auth/presenter/signup"
+	loginuc "github.com/shahincsejnu/gocom/auth/usecase/login"
 	signupuc "github.com/shahincsejnu/gocom/auth/usecase/signup"
 )
 
@@ -40,9 +42,11 @@ func newServer() (*http.Server, error) {
 
 	err = c.Invoke(func(
 		signupuc *signupuc.Usecase,
+		loginuc *loginuc.Usecase,
 	) {
 		r.GET("/", healthcheck.Handler())
 		r.POST("/signup", signup.Handler(signupuc))
+		r.POST("/login", login.Handler(loginuc))
 	})
 	if err != nil {
 		return nil, err

@@ -24,5 +24,6 @@ services:
       - 8084:8080
     environment:
       DATABASE_URL: postgresql://gocom:gocom123@gocomdb:5432/gocomdb?sslmode=disable
+      SECRET_KEY: supersecretkey123
     depends_on:
       - db
