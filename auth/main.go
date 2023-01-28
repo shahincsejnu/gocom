@@ -7,10 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 
 	_ "github.com/lib/pq"
-
+	"github.com/shahincsejnu/gocom/auth/presenter/consoleauth"
 	"github.com/shahincsejnu/gocom/auth/presenter/healthcheck"
 	"github.com/shahincsejnu/gocom/auth/presenter/login"
 	"github.com/shahincsejnu/gocom/auth/presenter/signup"
+	consoleauthuc "github.com/shahincsejnu/gocom/auth/usecase/consoleauth"
 	loginuc "github.com/shahincsejnu/gocom/auth/usecase/login"
 	signupuc "github.com/shahincsejnu/gocom/auth/usecase/signup"
 )
@@ -43,10 +44,12 @@ func newServer() (*http.Server, error) {
 	err = c.Invoke(func(
 		signupuc *signupuc.Usecase,
 		loginuc *loginuc.Usecase,
+		consoleAuth *consoleauthuc.Usecase,
 	) {
 		r.GET("/", healthcheck.Handler())
 		r.POST("/signup", signup.Handler(signupuc))
 		r.POST("/login", login.Handler(loginuc))
+		r.POST("/console", consoleauth.Handler(consoleAuth))
 	})
 	if err != nil {
 		return nil, err
