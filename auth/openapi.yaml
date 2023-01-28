@@ -81,6 +81,91 @@ paths:
           $ref: '#/components/responses/400'
         '500':
           $ref: '#/components/responses/500'
+    /login:
+    post:
+      summary: Login.
+      description: Login.
+      operationId: login
+      tags:
+        - Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                password:
+                  type: string
+              required:
+                - name
+                - password
+      responses:
+        '200':
+          description: Login succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Successfully logged in
+                  token:
+                    type: string
+                    description: jwt token
+                required:
+                  - ok
+                  - message
+                  - token
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+  /console:
+    post:
+      summary: Authorization from console.
+      description: Authorization from console.
+      operationId: authorization-console
+      tags:
+        - Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+              required:
+                - token
+      responses:
+        '200':
+          description: Console authorization succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/user'
+                required:
+                  - ok
+                  - message
+                  - user
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
 components:
   responses:
     '400':
@@ -117,3 +202,30 @@ components:
             required:
               - ok
               - message 
+  schemas:
+    user:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 7713b34a-27dc-5347-9fa8-12720f0dddcf
+        name:
+          type: string
+          example: Sample User Name
+        email:
+          type: string
+          example: demo@example.com
+        password:
+          type: string
+          example: sample hashed password
+        createdAt:
+          type: number
+        updatedAt:
+          type: number
+      required:
+        - id
+        - name
+        - email
+        - password
+        - createdAt
+        - updatedAt
