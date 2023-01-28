@@ -10,6 +10,7 @@ import (
 
 	sqlcdb "github.com/shahincsejnu/gocom/auth/infra/sqlc"
 	userpersistence "github.com/shahincsejnu/gocom/auth/persistence/user"
+	"github.com/shahincsejnu/gocom/auth/usecase/login"
 	"github.com/shahincsejnu/gocom/auth/usecase/signup"
 	"go.uber.org/dig"
 )
@@ -21,6 +22,7 @@ func newDIContainer() (*dig.Container, error) {
 		newSQLC,
 		newUserRepository,
 		newSignupUsecase,
+		newLoginUsecase,
 	}
 	for _, p := range pp {
 		if err := c.Provide(p); err != nil {
@@ -37,6 +39,12 @@ func newUserRepository(db *sqlcdb.Queries) *userpersistence.Repository {
 
 func newSignupUsecase(ur *userpersistence.Repository) *signup.Usecase {
 	return &signup.Usecase{
+		UserRepository: ur,
+	}
+}
+
+func newLoginUsecase(ur *userpersistence.Repository) *login.Usecase {
+	return &login.Usecase{
 		UserRepository: ur,
 	}
 }

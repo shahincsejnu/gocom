@@ -22,3 +22,7 @@ func (r *Repository) Save(ctx context.Context, name, email, password string) err
 
 	return r.DB.CreateUser(ctx, arg)
 }
+
+func (r *Repository) GetByName(ctx context.Context, name string) (sqlcdb.User, error) {
+	return r.DB.GetUserByName(ctx, name)
+}
