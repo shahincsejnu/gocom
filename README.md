@@ -17,7 +17,6 @@ In this `gocom` monorepo we'll demonstrate Golang based microservices following 
     - if you change anything in the proeject and wanna run with that then use `docker compose up --build`
     - you can run any specific service by `docker compose up <service_name_from_docker_compose_file>
 - [optional] you can connect to the DB via any(Like: `table plus`) GUI providing the connection info given in the `docker-compose.yaml` file's `db` service:
-    - 
     ```
         POSTGRES_USER: gocom
         POSTGRES_PASSWORD: gocom123
