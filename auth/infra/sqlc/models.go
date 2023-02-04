@@ -8,11 +8,42 @@ import (
 	"time"
 )
 
+type Address struct {
+	ID            string    `json:"id"`
+	UserID        string    `json:"userID"`
+	Country       string    `json:"country"`
+	City          string    `json:"city"`
+	StreetAddress string    `json:"streetAddress"`
+	CreatedAt     time.Time `json:"createdAt"`
+	UpdatedAt     time.Time `json:"updatedAt"`
+}
+
+type Order struct {
+	ID        string    `json:"id"`
+	ProductID string    `json:"productID"`
+	UserID    string    `json:"userID"`
+	AddressID string    `json:"addressID"`
+	Quantity  int32     `json:"quantity"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
+}
+
+type Product struct {
+	ID          string    `json:"id"`
+	Name        string    `json:"name"`
+	Price       int32     `json:"price"`
+	Description string    `json:"description"`
+	Stock       int32     `json:"stock"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
+
 type User struct {
 	ID        string    `json:"id"`
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	Password  string    `json:"password"`
+	IsAdmin   bool      `json:"isAdmin"`
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
 }
