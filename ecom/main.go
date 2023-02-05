@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	_ "github.com/lib/pq"
-	
+
 	"github.com/gin-gonic/gin"
 	"github.com/shahincsejnu/gocom/ecom/presenter/healthcheck"
 	"github.com/shahincsejnu/gocom/ecom/presenter/users"
