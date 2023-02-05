@@ -37,3 +37,68 @@ paths:
                 required:
                   - ok
                   - serviceName
+  '/users/{userID}':
+    parameters:
+      - name: userID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: user id of the respective user
+    get:
+      summary: Get user by userID.
+      description: Get the details of a user with userID.
+      operationId: get-one-user-by-userid
+      tags:
+        - User
+      responses:
+        '200':
+          description: User fetching is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/user'
+                required:
+                  - ok
+                  - message
+                  - user
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 7713b34a-27dc-5347-9fa8-12720f0dddcf
+        name:
+          type: string
+          example: Sample User Name
+        email:
+          type: string
+          example: demo@example.com
+        password:
+          type: string
+          example: sample hashed password
+        isAdmin:
+          type: boolean
+          example: false
+        createdAt:
+          type: number
+        updatedAt:
+          type: number
+      required:
+        - id
+        - name
+        - email
+        - password
+        - isAdmin
+        - createdAt
+        - updatedAt
