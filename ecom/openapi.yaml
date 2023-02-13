@@ -98,6 +98,51 @@ paths:
                   - ok
                   - message
                   - products
+    post:
+      summary: Create a product
+      description: To create/add a new product
+      operationId: create-one-product
+      tags:
+        - Create Product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                description:
+                  type: string
+                stock:
+                  type: number
+              required:
+                - name
+                - price
+                - description
+                - stock
+      responses:
+        '200':
+          description: Product creation is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  productID:
+                    type: string
+                required:
+                  - ok
+                  - message
+                  - productID
 components:
   schemas:
     user:

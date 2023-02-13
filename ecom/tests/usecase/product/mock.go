@@ -9,6 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	product "github.com/shahincsejnu/gocom/ecom/domain/product"
 	db "github.com/shahincsejnu/gocom/ecom/infra/sqlc"
 )
 
@@ -33,6 +34,21 @@ func NewMockProductRepository(ctrl *gomock.Controller) *MockProductRepository {
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockProductRepository) EXPECT() *MockProductRepositoryMockRecorder {
 	return m.recorder
+}
+
+// Create mocks base method.
+func (m *MockProductRepository) Create(ctx context.Context, opts *product.CreationOptions) (string, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Create", ctx, opts)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Create indicates an expected call of Create.
+func (mr *MockProductRepositoryMockRecorder) Create(ctx, opts interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockProductRepository)(nil).Create), ctx, opts)
 }
 
 // GetAll mocks base method.

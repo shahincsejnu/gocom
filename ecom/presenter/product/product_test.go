@@ -38,3 +38,9 @@ func NewGetProductListRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.GET("/products", handlerFunc)
 	return router
 }
+
+func NewCreateProductRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.POST("/products", handlerFunc)
+	return router
+}
