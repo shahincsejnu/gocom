@@ -70,6 +70,34 @@ paths:
                   - ok
                   - message
                   - user
+  /products:
+    get:
+      summary: Get all the products
+      description: Get the details of all products
+      operationId: get-all-products
+      tags:
+        - Products
+      responses:
+        '200':
+          description: Products fetching is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/product'
+                required:
+                  - ok
+                  - message
+                  - products
 components:
   schemas:
     user:
@@ -100,5 +128,35 @@ components:
         - email
         - password
         - isAdmin
+        - createdAt
+        - updatedAt
+    product:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 7713b34a-27dc-5347-9fa8-12720f0dddcf
+        name:
+          type: string
+          example: Sample Product Name
+        price:
+          type: number
+          example: 100
+        description:
+          type: string
+          example: sample product
+        stock:
+          type: number
+          example: 1
+        createdAt:
+          type: number
+        updatedAt:
+          type: number
+      required:
+        - id
+        - name
+        - price
+        - description
+        - stock
         - createdAt
         - updatedAt
