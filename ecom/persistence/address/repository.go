@@ -35,3 +35,12 @@ func (r *Repository) Create(ctx context.Context, opts *address.CreationOptions) 
 
 	return arg.ID, nil
 }
+
+func (r *Repository) GetOne(ctx context.Context, addressID string) (*sqlcdb.Address, error) {
+	addr, err := r.DB.GetAddressById(ctx, addressID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &addr, nil
+}

@@ -44,3 +44,9 @@ func NewCreateAddressRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.POST("/addresses", handlerFunc)
 	return router
 }
+
+func NewGetOneAddressRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.GET("/addresses/:addressID", handlerFunc)
+	return router
+}

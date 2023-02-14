@@ -479,6 +479,39 @@ paths:
                   - ok
                   - message
                   - addressID
+  '/addresses/{addressID}':
+    parameters:
+      - name: addressID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: address id of the respective address
+    get:
+      summary: Get one address by address id
+      description: Get the details of a address
+      operationId: get-one-address
+      tags:
+        - Address
+      responses:
+        '200':
+          description: Address fetching is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  address:
+                    $ref: '#/components/schemas/address'
+                required:
+                  - ok
+                  - message
+                  - address
 components:
   schemas:
     user:
