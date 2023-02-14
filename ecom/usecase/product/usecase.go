@@ -10,6 +10,7 @@ import (
 type ProductRepository interface {
 	GetAll(ctx context.Context) ([]sqlcdb.Product, error)
 	Create(ctx context.Context, opts *product.CreationOptions) (string, error)
+	Update(ctx context.Context, opts *product.UpdateOptions, productID string) error
 }
 
 type Usecase struct {
@@ -22,4 +23,8 @@ func (uc *Usecase) GetAllProducts(ctx context.Context) ([]sqlcdb.Product, error)
 
 func (uc *Usecase) CreateProduct(ctx context.Context, opts *product.CreationOptions) (string, error) {
 	return uc.ProductRepo.Create(ctx, opts)
+}
+
+func (uc *Usecase) UpdateProduct(ctx context.Context, opts *product.UpdateOptions, productID string) error {
+	return uc.ProductRepo.Update(ctx, opts, productID)
 }

@@ -40,3 +40,13 @@ func (r *Repository) Create(ctx context.Context, opts *product.CreationOptions) 
 
 	return arg.ID, nil
 }
+
+func (r *Repository) Update(ctx context.Context, opts *product.UpdateOptions, productID string) error {
+	arg := sqlcdb.UpdateProductParams{
+		ID:          productID,
+		Price:       int32(opts.Price),
+		Description: opts.Description,
+		Stock:       int32(opts.Stock),
+	}
+	return r.DB.UpdateProduct(ctx, arg)
+}

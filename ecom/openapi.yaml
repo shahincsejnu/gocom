@@ -143,6 +143,51 @@ paths:
                   - ok
                   - message
                   - productID
+  '/products/{productID}':
+    parameters:
+      - name: productID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: product id of the respective product
+    patch:
+      summary: Update info of a product
+      operationId: patch-product
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                price:
+                  type: number
+                description:
+                  type: string
+                stock:
+                  type: number
+              required:
+                - price
+                - description
+                - stock
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                required:
+                  - ok
+                  - message
 components:
   schemas:
     user:

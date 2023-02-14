@@ -65,3 +65,17 @@ func (mr *MockProductRepositoryMockRecorder) GetAll(ctx interface{}) *gomock.Cal
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAll", reflect.TypeOf((*MockProductRepository)(nil).GetAll), ctx)
 }
+
+// Update mocks base method.
+func (m *MockProductRepository) Update(ctx context.Context, opts *product.UpdateOptions, productID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Update", ctx, opts, productID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Update indicates an expected call of Update.
+func (mr *MockProductRepositoryMockRecorder) Update(ctx, opts, productID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockProductRepository)(nil).Update), ctx, opts, productID)
+}

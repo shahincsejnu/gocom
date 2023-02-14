@@ -44,3 +44,9 @@ func NewCreateProductRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.POST("/products", handlerFunc)
 	return router
 }
+
+func NewUpdateProductRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.PATCH("/products/:productID", handlerFunc)
+	return router
+}
