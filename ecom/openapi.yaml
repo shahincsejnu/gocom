@@ -235,6 +235,39 @@ paths:
                 required:
                   - ok
                   - message
+  '/orders/{userID}':
+    parameters:
+      - name: userID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: user id of the respective user
+    get:
+      summary: Get orders by userID.
+      description: Get the details of the orders of a user.
+      operationId: get-orders-list-by-userid
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: Orders fetching is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  orders:
+                    $ref: '#/components/schemas/order'
+                required:
+                  - ok
+                  - message
+                  - orders
 components:
   schemas:
     user:
@@ -295,5 +328,30 @@ components:
         - price
         - description
         - stock
+        - createdAt
+        - updatedAt
+    order:
+      type: object
+      properties:
+        id:
+          type: string
+        productID:
+          type: string
+        userID:
+          type: string
+        addressID:
+          type: string
+        quantity:
+          type: number
+        createdAt:
+          type: number
+        updatedAt:
+          type: number
+      required:
+        - id
+        - productID
+        - userID
+        - addressID
+        - quantity
         - createdAt
         - updatedAt
