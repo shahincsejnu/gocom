@@ -213,6 +213,28 @@ paths:
                 required:
                   - ok
                   - message
+    delete:
+      summary: Delete one product by product id
+      description: Delete the product
+      operationId: delete-one-product
+      tags:
+        - Product
+      responses:
+        '200':
+          description: Product deletion is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                required:
+                  - ok
+                  - message
 components:
   schemas:
     user:

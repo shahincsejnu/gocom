@@ -59,3 +59,7 @@ func (r *Repository) Update(ctx context.Context, opts *product.UpdateOptions, pr
 	}
 	return r.DB.UpdateProduct(ctx, arg)
 }
+
+func (r *Repository) DeleteOne(ctx context.Context, productID string) error {
+	return r.DB.DeleteProduct(ctx, productID)
+}

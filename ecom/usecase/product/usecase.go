@@ -12,6 +12,7 @@ type ProductRepository interface {
 	GetOne(ctx context.Context, productID string) (*sqlcdb.Product, error)
 	Create(ctx context.Context, opts *product.CreationOptions) (string, error)
 	Update(ctx context.Context, opts *product.UpdateOptions, productID string) error
+	DeleteOne(ctx context.Context, productID string) error
 }
 
 type Usecase struct {
@@ -32,4 +33,8 @@ func (uc *Usecase) UpdateProduct(ctx context.Context, opts *product.UpdateOption
 
 func (uc *Usecase) GetOneProduct(ctx context.Context, productID string) (*sqlcdb.Product, error) {
 	return uc.ProductRepo.GetOne(ctx, productID)
+}
+
+func (uc *Usecase) DeleteOneProduct(ctx context.Context, productID string) error {
+	return uc.ProductRepo.DeleteOne(ctx, productID)
 }

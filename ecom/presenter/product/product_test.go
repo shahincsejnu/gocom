@@ -56,3 +56,9 @@ func NewGetOneProductRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.GET("/products/:productID", handlerFunc)
 	return router
 }
+
+func NewDeleteOneProductRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.DELETE("/products/:productID", handlerFunc)
+	return router
+}
