@@ -38,3 +38,9 @@ func NewGetOrdersListRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.GET("/orders/:userID", handlerFunc)
 	return router
 }
+
+func NewCreateOrderRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.POST("/orders", handlerFunc)
+	return router
+}

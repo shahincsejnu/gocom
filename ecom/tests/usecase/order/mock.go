@@ -9,6 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	order "github.com/shahincsejnu/gocom/ecom/domain/order"
 	db "github.com/shahincsejnu/gocom/ecom/infra/sqlc"
 )
 
@@ -35,17 +36,32 @@ func (m *MockOrderRepository) EXPECT() *MockOrderRepositoryMockRecorder {
 	return m.recorder
 }
 
-// GetList mocks base method.
-func (m *MockOrderRepository) GetList(ctx context.Context, id string) ([]db.Order, error) {
+// Create mocks base method.
+func (m *MockOrderRepository) Create(ctx context.Context, opts *order.CreationOptions) (string, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetList", ctx, id)
+	ret := m.ctrl.Call(m, "Create", ctx, opts)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Create indicates an expected call of Create.
+func (mr *MockOrderRepositoryMockRecorder) Create(ctx, opts interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockOrderRepository)(nil).Create), ctx, opts)
+}
+
+// GetList mocks base method.
+func (m *MockOrderRepository) GetList(ctx context.Context, userID string) ([]db.Order, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetList", ctx, userID)
 	ret0, _ := ret[0].([]db.Order)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetList indicates an expected call of GetList.
-func (mr *MockOrderRepositoryMockRecorder) GetList(ctx, id interface{}) *gomock.Call {
+func (mr *MockOrderRepositoryMockRecorder) GetList(ctx, userID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetList", reflect.TypeOf((*MockOrderRepository)(nil).GetList), ctx, id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetList", reflect.TypeOf((*MockOrderRepository)(nil).GetList), ctx, userID)
 }

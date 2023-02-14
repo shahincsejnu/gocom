@@ -268,6 +268,52 @@ paths:
                   - ok
                   - message
                   - orders
+  /orders:
+    post:
+      summary: Create a order
+      description: To create/add a new order
+      operationId: create-one-order
+      tags:
+        - Create Order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productID:
+                  type: string
+                userID:
+                  type: string
+                addressID:
+                  type: string
+                quantity:
+                  type: number
+              required:
+                - productID
+                - userID
+                - addressID
+                - quantity
+      responses:
+        '200':
+          description: Order creation is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  orderID:
+                    type: string
+                required:
+                  - ok
+                  - message
+                  - orderID
 components:
   schemas:
     user:
