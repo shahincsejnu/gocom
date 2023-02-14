@@ -38,3 +38,9 @@ func NewGetAddressListRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.GET("/address/:userID", handlerFunc)
 	return router
 }
+
+func NewCreateAddressRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.POST("/addresses", handlerFunc)
+	return router
+}

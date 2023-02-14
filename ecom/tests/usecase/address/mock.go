@@ -9,6 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	address "github.com/shahincsejnu/gocom/ecom/domain/address"
 	db "github.com/shahincsejnu/gocom/ecom/infra/sqlc"
 )
 
@@ -33,6 +34,21 @@ func NewMockAddressRepository(ctrl *gomock.Controller) *MockAddressRepository {
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockAddressRepository) EXPECT() *MockAddressRepositoryMockRecorder {
 	return m.recorder
+}
+
+// Create mocks base method.
+func (m *MockAddressRepository) Create(ctx context.Context, opts *address.CreationOptions) (string, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Create", ctx, opts)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Create indicates an expected call of Create.
+func (mr *MockAddressRepositoryMockRecorder) Create(ctx, opts interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockAddressRepository)(nil).Create), ctx, opts)
 }
 
 // GetList mocks base method.

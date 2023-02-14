@@ -433,6 +433,52 @@ paths:
                   - ok
                   - message
                   - addresses
+  /addresses:
+    post:
+      summary: Create an address
+      description: To create/add a new address
+      operationId: create-one-address
+      tags:
+        - Create Address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userID:
+                  type: string
+                country:
+                  type: string
+                city:
+                  type: string
+                streetAddress:
+                  type: string
+              required:
+                - userID
+                - country
+                - city
+                - streetAddress
+      responses:
+        '200':
+          description: Address creation is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  addressID:
+                    type: string
+                required:
+                  - ok
+                  - message
+                  - addressID
 components:
   schemas:
     user:
