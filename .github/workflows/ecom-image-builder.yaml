@@ -1,0 +1,31 @@
+name: Ecom service docker image build and push to dockerhub
+on:
+  push:
+    paths:
+      - 'ecom/**'
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  build:
+    name: Build Image
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          DOCKERHUB_REPOSITORY: gocom-ecom
+        run: |
+          cd ./ecom
+          export IMAGE_TAG=$(git describe --tags --always --dirty)
+          docker build -t ${{secrets.DOCKER_USER}}/$DOCKERHUB_REPOSITORY:$IMAGE_TAG -f ./docker/Dockerfile .
+          echo "Pushing image to dockerhub..."
+          docker push ${{secrets.DOCKER_USER}}/$DOCKERHUB_REPOSITORY:$IMAGE_TAG
