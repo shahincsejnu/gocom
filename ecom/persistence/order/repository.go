@@ -44,3 +44,11 @@ func (r *Repository) Create(ctx context.Context, opts *order.CreationOptions) (s
 
 	return arg.ID, nil
 }
+
+func (r *Repository) UpdateOne(ctx context.Context, opts *order.UpdateOptions, orderID string) error {
+	arg := sqlcdb.UpdateOrderParams{
+		ID:       orderID,
+		Quantity: int32(opts.Quantity),
+	}
+	return r.DB.UpdateOrder(ctx, arg)
+}

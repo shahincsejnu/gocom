@@ -50,3 +50,9 @@ func NewGetOneOrderRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.GET("/orders/:orderID", handlerFunc)
 	return router
 }
+
+func NewUpdateOneOrderRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.PATCH("/orders/:orderID", handlerFunc)
+	return router
+}

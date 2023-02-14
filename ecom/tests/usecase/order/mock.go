@@ -80,3 +80,17 @@ func (mr *MockOrderRepositoryMockRecorder) GetOne(ctx, orderID interface{}) *gom
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOne", reflect.TypeOf((*MockOrderRepository)(nil).GetOne), ctx, orderID)
 }
+
+// UpdateOne mocks base method.
+func (m *MockOrderRepository) UpdateOne(ctx context.Context, opts *order.UpdateOptions, orderID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateOne", ctx, opts, orderID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// UpdateOne indicates an expected call of UpdateOne.
+func (mr *MockOrderRepositoryMockRecorder) UpdateOne(ctx, opts, orderID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOne", reflect.TypeOf((*MockOrderRepository)(nil).UpdateOne), ctx, opts, orderID)
+}

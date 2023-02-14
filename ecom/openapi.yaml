@@ -347,6 +347,37 @@ paths:
                   - ok
                   - message
                   - order
+    patch:
+      summary: Update info of a order
+      operationId: patch-order
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: number
+              required:
+                - quantity
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                required:
+                  - ok
+                  - message
 components:
   schemas:
     user:

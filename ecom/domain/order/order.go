@@ -6,3 +6,7 @@ type CreationOptions struct {
 	AddressID string `json:"addressID" binding:"required"`
 	Quantity  int    `json:"quantity" binding:"required"`
 }
+
+type UpdateOptions struct {
+	Quantity int `json:"quantity" binding:"required"`
+}
