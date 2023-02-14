@@ -9,6 +9,7 @@ import (
 
 type OrderRepository interface {
 	GetList(ctx context.Context, userID string) ([]sqlcdb.Order, error)
+	GetOne(ctx context.Context, orderID string) (*sqlcdb.Order, error)
 	Create(ctx context.Context, opts *order.CreationOptions) (string, error)
 }
 
@@ -22,4 +23,8 @@ func (uc *Usecase) GetOrdersList(ctx context.Context, userID string) ([]sqlcdb.O
 
 func (uc *Usecase) CreateOrder(ctx context.Context, opts *order.CreationOptions) (string, error) {
 	return uc.OrderRepo.Create(ctx, opts)
+}
+
+func (uc *Usecase) GetOneOrder(ctx context.Context, orderID string) (*sqlcdb.Order, error) {
+	return uc.OrderRepo.GetOne(ctx, orderID)
 }

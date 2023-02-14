@@ -44,3 +44,9 @@ func NewCreateOrderRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.POST("/orders", handlerFunc)
 	return router
 }
+
+func NewGetOneOrderRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.GET("/orders/:orderID", handlerFunc)
+	return router
+}

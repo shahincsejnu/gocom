@@ -314,6 +314,39 @@ paths:
                   - ok
                   - message
                   - orderID
+  '/orders/{orderID}':
+    parameters:
+      - name: orderID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: order id of the respective order
+    get:
+      summary: Get one order by order id
+      description: Get the details of a order
+      operationId: get-one-order
+      tags:
+        - Order
+      responses:
+        '200':
+          description: Order fetching is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  order:
+                    $ref: '#/components/schemas/order'
+                required:
+                  - ok
+                  - message
+                  - order
 components:
   schemas:
     user:

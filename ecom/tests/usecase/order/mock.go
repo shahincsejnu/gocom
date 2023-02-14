@@ -65,3 +65,18 @@ func (mr *MockOrderRepositoryMockRecorder) GetList(ctx, userID interface{}) *gom
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetList", reflect.TypeOf((*MockOrderRepository)(nil).GetList), ctx, userID)
 }
+
+// GetOne mocks base method.
+func (m *MockOrderRepository) GetOne(ctx context.Context, orderID string) (*db.Order, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOne", ctx, orderID)
+	ret0, _ := ret[0].(*db.Order)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOne indicates an expected call of GetOne.
+func (mr *MockOrderRepositoryMockRecorder) GetOne(ctx, orderID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOne", reflect.TypeOf((*MockOrderRepository)(nil).GetOne), ctx, orderID)
+}
