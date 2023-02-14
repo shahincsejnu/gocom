@@ -57,6 +57,7 @@ func newServer() (*http.Server, error) {
 		r.POST("/orders", order.CreationHandler(orderUC))
 		r.GET("/orders/:orderID", order.GetOneHandler(orderUC))
 		r.PATCH("/orders/:orderID", order.UpdateOneHandler(orderUC))
+		r.DELETE("/orders/:orderID", order.DeleteOneHandler(orderUC))
 	})
 	if err != nil {
 		return nil, err

@@ -56,3 +56,9 @@ func NewUpdateOneOrderRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.PATCH("/orders/:orderID", handlerFunc)
 	return router
 }
+
+func NewDeleteOneOrderRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.DELETE("/orders/:orderID", handlerFunc)
+	return router
+}

@@ -52,3 +52,7 @@ func (r *Repository) UpdateOne(ctx context.Context, opts *order.UpdateOptions, o
 	}
 	return r.DB.UpdateOrder(ctx, arg)
 }
+
+func (r *Repository) DeleteOne(ctx context.Context, orderID string) error {
+	return r.DB.DeleteOrder(ctx, orderID)
+}

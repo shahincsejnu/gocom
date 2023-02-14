@@ -378,6 +378,28 @@ paths:
                 required:
                   - ok
                   - message
+    delete:
+      summary: Delete one order by order id
+      description: Delete the order
+      operationId: delete-one-order
+      tags:
+        - Order
+      responses:
+        '200':
+          description: Order deletion is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                required:
+                  - ok
+                  - message
 components:
   schemas:
     user:
