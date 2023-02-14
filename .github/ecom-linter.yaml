@@ -1,0 +1,24 @@
+name: Ecom Service
+on: [ push ]
+permissions:
+  contents: read
+jobs:
+  golangci:
+    name: ecom-service-lint-and-tests
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "1.18"
+      - name: go deps installation
+        run: cd ecom && go get ./...
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.51.0
+          working-directory: ecom/
+          skip-go-installation: true
+          skip-pkg-cache: true
+      - name: tests
+        run: cd ecom && go test -v ./...
