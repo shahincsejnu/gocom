@@ -400,6 +400,39 @@ paths:
                 required:
                   - ok
                   - message
+  '/address/{userID}':
+    parameters:
+      - name: userID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: user id of the respective user
+    get:
+      summary: Get addresses by userID.
+      description: Get the details of the addresses of a user.
+      operationId: get-address-list-by-userid
+      tags:
+        - Addresses
+      responses:
+        '200':
+          description: Addresses fetching is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  addresses:
+                    $ref: '#/components/schemas/address'
+                required:
+                  - ok
+                  - message
+                  - addresses
 components:
   schemas:
     user:
@@ -485,5 +518,30 @@ components:
         - userID
         - addressID
         - quantity
+        - createdAt
+        - updatedAt
+    address:
+      type: object
+      properties:
+        id:
+          type: string
+        userID:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        streetAddress:
+          type: string
+        createdAt:
+          type: number
+        updatedAt:
+          type: number
+      required:
+        - id
+        - userID
+        - country
+        - city
+        - streetAddress
         - createdAt
         - updatedAt

@@ -9,9 +9,11 @@ import (
 	"time"
 
 	sqlcdb "github.com/shahincsejnu/gocom/ecom/infra/sqlc"
+	addressper "github.com/shahincsejnu/gocom/ecom/persistence/address"
 	orderper "github.com/shahincsejnu/gocom/ecom/persistence/order"
 	productper "github.com/shahincsejnu/gocom/ecom/persistence/product"
 	userper "github.com/shahincsejnu/gocom/ecom/persistence/users"
+	"github.com/shahincsejnu/gocom/ecom/usecase/address"
 	"github.com/shahincsejnu/gocom/ecom/usecase/order"
 	"github.com/shahincsejnu/gocom/ecom/usecase/product"
 	"github.com/shahincsejnu/gocom/ecom/usecase/users"
@@ -26,9 +28,11 @@ func newDIContainer() (*dig.Container, error) {
 		userper.NewRepository,
 		productper.NewRepository,
 		orderper.NewRepository,
+		addressper.NewRepository,
 		newUserUsecase,
 		newProductUsecase,
 		newOrderUsecase,
+		newAddressUsecase,
 	}
 	for _, p := range pp {
 		if err := c.Provide(p); err != nil {
@@ -37,6 +41,12 @@ func newDIContainer() (*dig.Container, error) {
 	}
 
 	return c, nil
+}
+
+func newAddressUsecase(ur *addressper.Repository) *address.Usecase {
+	return &address.Usecase{
+		AddressRepo: ur,
+	}
 }
 
 func newOrderUsecase(ur *orderper.Repository) *order.Usecase {
