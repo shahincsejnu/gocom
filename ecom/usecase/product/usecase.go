@@ -9,6 +9,7 @@ import (
 
 type ProductRepository interface {
 	GetAll(ctx context.Context) ([]sqlcdb.Product, error)
+	GetOne(ctx context.Context, productID string) (*sqlcdb.Product, error)
 	Create(ctx context.Context, opts *product.CreationOptions) (string, error)
 	Update(ctx context.Context, opts *product.UpdateOptions, productID string) error
 }
@@ -27,4 +28,8 @@ func (uc *Usecase) CreateProduct(ctx context.Context, opts *product.CreationOpti
 
 func (uc *Usecase) UpdateProduct(ctx context.Context, opts *product.UpdateOptions, productID string) error {
 	return uc.ProductRepo.Update(ctx, opts, productID)
+}
+
+func (uc *Usecase) GetOneProduct(ctx context.Context, productID string) (*sqlcdb.Product, error) {
+	return uc.ProductRepo.GetOne(ctx, productID)
 }

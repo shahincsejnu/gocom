@@ -25,6 +25,15 @@ func (r *Repository) GetAll(ctx context.Context) ([]sqlcdb.Product, error) {
 	return products, nil
 }
 
+func (r *Repository) GetOne(ctx context.Context, productID string) (*sqlcdb.Product, error) {
+	prd, err := r.DB.GetProductById(ctx, productID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &prd, nil
+}
+
 func (r *Repository) Create(ctx context.Context, opts *product.CreationOptions) (string, error) {
 	arg := sqlcdb.CreateProductParams{
 		ID:          uuid.NewString(),

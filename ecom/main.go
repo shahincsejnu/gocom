@@ -48,6 +48,7 @@ func newServer() (*http.Server, error) {
 		r.GET("/products", product.GetListHandler(productUC))
 		r.POST("/products", product.CreationHandler(productUC))
 		r.PATCH("/products/:productID", product.UpdateHandler(productUC))
+		r.GET("/products/:productID", product.GetOneHandler(productUC))
 	})
 	if err != nil {
 		return nil, err

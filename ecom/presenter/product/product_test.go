@@ -50,3 +50,9 @@ func NewUpdateProductRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.PATCH("/products/:productID", handlerFunc)
 	return router
 }
+
+func NewGetOneProductRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.GET("/products/:productID", handlerFunc)
+	return router
+}

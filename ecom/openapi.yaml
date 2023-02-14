@@ -151,6 +151,31 @@ paths:
         schema:
           type: string
         description: product id of the respective product
+    get:
+      summary: Get one product by product id
+      description: Get the details of a product
+      operationId: get-one-product
+      tags:
+        - Product
+      responses:
+        '200':
+          description: Product fetching is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  product:
+                    $ref: '#/components/schemas/product'
+                required:
+                  - ok
+                  - message
+                  - product
     patch:
       summary: Update info of a product
       operationId: patch-product

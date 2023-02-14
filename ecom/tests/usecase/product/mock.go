@@ -66,6 +66,21 @@ func (mr *MockProductRepositoryMockRecorder) GetAll(ctx interface{}) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAll", reflect.TypeOf((*MockProductRepository)(nil).GetAll), ctx)
 }
 
+// GetOne mocks base method.
+func (m *MockProductRepository) GetOne(ctx context.Context, productID string) (*db.Product, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOne", ctx, productID)
+	ret0, _ := ret[0].(*db.Product)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOne indicates an expected call of GetOne.
+func (mr *MockProductRepositoryMockRecorder) GetOne(ctx, productID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOne", reflect.TypeOf((*MockProductRepository)(nil).GetOne), ctx, productID)
+}
+
 // Update mocks base method.
 func (m *MockProductRepository) Update(ctx context.Context, opts *product.UpdateOptions, productID string) error {
 	m.ctrl.T.Helper()
