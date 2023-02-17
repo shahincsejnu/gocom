@@ -54,3 +54,7 @@ func (r *Repository) UpdateOne(ctx context.Context, opts *address.UpdateOptions,
 	}
 	return r.DB.UpdateAddress(ctx, arg)
 }
+
+func (r *Repository) DeleteOne(ctx context.Context, addressID string) error {
+	return r.DB.DeleteAddress(ctx, addressID)
+}

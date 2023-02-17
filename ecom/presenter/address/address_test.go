@@ -56,3 +56,9 @@ func NewUpdateOneAddressRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.PATCH("/addresses/:addressID", handlerFunc)
 	return router
 }
+
+func NewDeleteOneAddressRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.DELETE("/addresses/:addressID", handlerFunc)
+	return router
+}

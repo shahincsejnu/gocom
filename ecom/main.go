@@ -65,6 +65,7 @@ func newServer() (*http.Server, error) {
 		r.POST("/addresses", address.CreationHandler(addressUC))
 		r.GET("/addresses/:addressID", address.GetOneHandler(addressUC))
 		r.PATCH("/addresses/:addressID", address.UpdateOneHandler(addressUC))
+		r.DELETE("/addresses/:addressID", address.DeleteOneHandler(addressUC))
 	})
 	if err != nil {
 		return nil, err

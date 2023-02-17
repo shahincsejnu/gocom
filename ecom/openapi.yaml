@@ -549,6 +549,28 @@ paths:
                 required:
                   - ok
                   - message
+    delete:
+      summary: Delete one address by address id
+      description: Delete the address
+      operationId: delete-one-address
+      tags:
+        - Address
+      responses:
+        '200':
+          description: Address deletion is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                required:
+                  - ok
+                  - message
 components:
   schemas:
     user:
