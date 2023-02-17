@@ -44,3 +44,13 @@ func (r *Repository) GetOne(ctx context.Context, addressID string) (*sqlcdb.Addr
 
 	return &addr, nil
 }
+
+func (r *Repository) UpdateOne(ctx context.Context, opts *address.UpdateOptions, addressID string) error {
+	arg := sqlcdb.UpdateAddressParams{
+		ID:            addressID,
+		Country:       opts.Country,
+		City:          opts.City,
+		StreetAddress: opts.StreetAddress,
+	}
+	return r.DB.UpdateAddress(ctx, arg)
+}

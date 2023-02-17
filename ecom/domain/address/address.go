@@ -6,3 +6,9 @@ type CreationOptions struct {
 	City          string `json:"city" binding:"required"`
 	StreetAddress string `json:"streetAddress" binding:"required"`
 }
+
+type UpdateOptions struct {
+	Country       string `json:"country" binding:"required"`
+	City          string `json:"city" binding:"required"`
+	StreetAddress string `json:"streetAddress" binding:"required"`
+}

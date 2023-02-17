@@ -50,3 +50,9 @@ func NewGetOneAddressRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.GET("/addresses/:addressID", handlerFunc)
 	return router
 }
+
+func NewUpdateOneAddressRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.PATCH("/addresses/:addressID", handlerFunc)
+	return router
+}

@@ -80,3 +80,17 @@ func (mr *MockAddressRepositoryMockRecorder) GetOne(ctx, addressID interface{}) 
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOne", reflect.TypeOf((*MockAddressRepository)(nil).GetOne), ctx, addressID)
 }
+
+// UpdateOne mocks base method.
+func (m *MockAddressRepository) UpdateOne(ctx context.Context, opts *address.UpdateOptions, addressID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateOne", ctx, opts, addressID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// UpdateOne indicates an expected call of UpdateOne.
+func (mr *MockAddressRepositoryMockRecorder) UpdateOne(ctx, opts, addressID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOne", reflect.TypeOf((*MockAddressRepository)(nil).UpdateOne), ctx, opts, addressID)
+}
