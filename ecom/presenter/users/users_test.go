@@ -38,3 +38,15 @@ func NewGetUserOneRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
 	router.GET("/users/:userID", handlerFunc)
 	return router
 }
+
+func NewGetUserAddressesListRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.GET("/users/:userID/addresses", handlerFunc)
+	return router
+}
+
+func NewGetUserOrdersListRouter(handlerFunc gin.HandlerFunc) *gin.Engine {
+	router := gin.Default()
+	router.GET("/users/:userID/orders", handlerFunc)
+	return router
+}

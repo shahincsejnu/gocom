@@ -51,17 +51,20 @@ func newServer() (*http.Server, error) {
 	) {
 		r.GET("/", healthcheck.Handler())
 		r.GET("/users/:userID", users.GetOneHandler(userUC))
+		r.GET("/users/:userID/orders", users.GetUserOrdersListHandler(userUC))
+		r.GET("/users/:userID/addresses", users.GetUserAddressesListHandler(userUC))
+
 		r.GET("/products", product.GetListHandler(productUC))
 		r.POST("/products", product.CreationHandler(productUC))
 		r.PATCH("/products/:productID", product.UpdateHandler(productUC))
 		r.GET("/products/:productID", product.GetOneHandler(productUC))
 		r.DELETE("/products/:productID", product.DeleteOneHandler(productUC))
-		r.GET("/orders/:userID", order.GetListHandler(orderUC))
+
 		r.POST("/orders", order.CreationHandler(orderUC))
 		r.GET("/orders/:orderID", order.GetOneHandler(orderUC))
 		r.PATCH("/orders/:orderID", order.UpdateOneHandler(orderUC))
 		r.DELETE("/orders/:orderID", order.DeleteOneHandler(orderUC))
-		r.GET("/addresses/:userID", address.GetListHandler(addressUC))
+
 		r.POST("/addresses", address.CreationHandler(addressUC))
 		r.GET("/addresses/:addressID", address.GetOneHandler(addressUC))
 		r.PATCH("/addresses/:addressID", address.UpdateOneHandler(addressUC))

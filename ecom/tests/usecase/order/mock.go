@@ -65,21 +65,6 @@ func (mr *MockOrderRepositoryMockRecorder) DeleteOne(ctx, orderID interface{}) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOne", reflect.TypeOf((*MockOrderRepository)(nil).DeleteOne), ctx, orderID)
 }
 
-// GetList mocks base method.
-func (m *MockOrderRepository) GetList(ctx context.Context, userID string) ([]db.Order, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetList", ctx, userID)
-	ret0, _ := ret[0].([]db.Order)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetList indicates an expected call of GetList.
-func (mr *MockOrderRepositoryMockRecorder) GetList(ctx, userID interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetList", reflect.TypeOf((*MockOrderRepository)(nil).GetList), ctx, userID)
-}
-
 // GetOne mocks base method.
 func (m *MockOrderRepository) GetOne(ctx context.Context, orderID string) (*db.Order, error) {
 	m.ctrl.T.Helper()

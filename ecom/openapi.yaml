@@ -70,6 +70,72 @@ paths:
                   - ok
                   - message
                   - user
+  '/users/{userID}/orders':
+    parameters:
+      - name: userID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: user id of the respective user
+    get:
+      summary: Get orders of a user.
+      description: Get the details of the orders of a user.
+      operationId: get-orders-list-by-userid
+      tags:
+        - User Orders
+      responses:
+        '200':
+          description: User Orders fetching is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  orders:
+                    $ref: '#/components/schemas/order'
+                required:
+                  - ok
+                  - message
+                  - orders
+  '/users/{userID}/addresses':
+    parameters:
+      - name: userID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: user id of the respective user
+    get:
+      summary: Get addresses of a user.
+      description: Get the details of the addresses of a user.
+      operationId: get-address-list-by-userid
+      tags:
+        - User Addresses
+      responses:
+        '200':
+          description: User Addresses fetching is succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                  addresses:
+                    $ref: '#/components/schemas/address'
+                required:
+                  - ok
+                  - message
+                  - addresses
   /products:
     get:
       summary: Get all the products
@@ -235,39 +301,6 @@ paths:
                 required:
                   - ok
                   - message
-  '/orders/{userID}':
-    parameters:
-      - name: userID
-        in: path
-        required: true
-        schema:
-          type: string
-        description: user id of the respective user
-    get:
-      summary: Get orders by userID.
-      description: Get the details of the orders of a user.
-      operationId: get-orders-list-by-userid
-      tags:
-        - Orders
-      responses:
-        '200':
-          description: Orders fetching is succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                  orders:
-                    $ref: '#/components/schemas/order'
-                required:
-                  - ok
-                  - message
-                  - orders
   /orders:
     post:
       summary: Create a order
@@ -400,39 +433,6 @@ paths:
                 required:
                   - ok
                   - message
-  '/address/{userID}':
-    parameters:
-      - name: userID
-        in: path
-        required: true
-        schema:
-          type: string
-        description: user id of the respective user
-    get:
-      summary: Get addresses by userID.
-      description: Get the details of the addresses of a user.
-      operationId: get-address-list-by-userid
-      tags:
-        - Addresses
-      responses:
-        '200':
-          description: Addresses fetching is succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                  addresses:
-                    $ref: '#/components/schemas/address'
-                required:
-                  - ok
-                  - message
-                  - addresses
   /addresses:
     post:
       summary: Create an address

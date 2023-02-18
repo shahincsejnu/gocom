@@ -8,7 +8,6 @@ import (
 )
 
 type AddressRepository interface {
-	GetList(ctx context.Context, userID string) ([]sqlcdb.Address, error)
 	GetOne(ctx context.Context, addressID string) (*sqlcdb.Address, error)
 	Create(ctx context.Context, opts *address.CreationOptions) (string, error)
 	UpdateOne(ctx context.Context, opts *address.UpdateOptions, addressID string) error
@@ -17,10 +16,6 @@ type AddressRepository interface {
 
 type Usecase struct {
 	AddressRepo AddressRepository
-}
-
-func (uc *Usecase) GetAddressesList(ctx context.Context, userID string) ([]sqlcdb.Address, error) {
-	return uc.AddressRepo.GetList(ctx, userID)
 }
 
 func (uc *Usecase) CreateAddress(ctx context.Context, opts *address.CreationOptions) (string, error) {

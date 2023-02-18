@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	sqlc "github.com/shahincsejnu/gocom/ecom/infra/sqlc"
+	db "github.com/shahincsejnu/gocom/ecom/infra/sqlc"
 )
 
 // MockUserRepository is a mock of UserRepository interface.
@@ -35,11 +35,26 @@ func (m *MockUserRepository) EXPECT() *MockUserRepositoryMockRecorder {
 	return m.recorder
 }
 
+// GetAddressesList mocks base method.
+func (m *MockUserRepository) GetAddressesList(ctx context.Context, userID string) ([]db.Address, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAddressesList", ctx, userID)
+	ret0, _ := ret[0].([]db.Address)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAddressesList indicates an expected call of GetAddressesList.
+func (mr *MockUserRepositoryMockRecorder) GetAddressesList(ctx, userID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAddressesList", reflect.TypeOf((*MockUserRepository)(nil).GetAddressesList), ctx, userID)
+}
+
 // GetById mocks base method.
-func (m *MockUserRepository) GetById(ctx context.Context, id string) (*sqlc.User, error) {
+func (m *MockUserRepository) GetById(ctx context.Context, id string) (*db.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetById", ctx, id)
-	ret0, _ := ret[0].(*sqlc.User)
+	ret0, _ := ret[0].(*db.User)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -48,4 +63,19 @@ func (m *MockUserRepository) GetById(ctx context.Context, id string) (*sqlc.User
 func (mr *MockUserRepositoryMockRecorder) GetById(ctx, id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetById", reflect.TypeOf((*MockUserRepository)(nil).GetById), ctx, id)
+}
+
+// GetOrdersList mocks base method.
+func (m *MockUserRepository) GetOrdersList(ctx context.Context, userID string) ([]db.Order, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrdersList", ctx, userID)
+	ret0, _ := ret[0].([]db.Order)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOrdersList indicates an expected call of GetOrdersList.
+func (mr *MockUserRepositoryMockRecorder) GetOrdersList(ctx, userID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrdersList", reflect.TypeOf((*MockUserRepository)(nil).GetOrdersList), ctx, userID)
 }

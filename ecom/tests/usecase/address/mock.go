@@ -65,21 +65,6 @@ func (mr *MockAddressRepositoryMockRecorder) DeleteOne(ctx, addressID interface{
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOne", reflect.TypeOf((*MockAddressRepository)(nil).DeleteOne), ctx, addressID)
 }
 
-// GetList mocks base method.
-func (m *MockAddressRepository) GetList(ctx context.Context, userID string) ([]db.Address, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetList", ctx, userID)
-	ret0, _ := ret[0].([]db.Address)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetList indicates an expected call of GetList.
-func (mr *MockAddressRepositoryMockRecorder) GetList(ctx, userID interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetList", reflect.TypeOf((*MockAddressRepository)(nil).GetList), ctx, userID)
-}
-
 // GetOne mocks base method.
 func (m *MockAddressRepository) GetOne(ctx context.Context, addressID string) (*db.Address, error) {
 	m.ctrl.T.Helper()

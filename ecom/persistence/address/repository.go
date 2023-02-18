@@ -16,10 +16,6 @@ func NewRepository(db *sqlcdb.Queries) *Repository {
 	return &Repository{DB: db}
 }
 
-func (r *Repository) GetList(ctx context.Context, userID string) ([]sqlcdb.Address, error) {
-	return r.DB.GetAddressesByUser(ctx, userID)
-}
-
 func (r *Repository) Create(ctx context.Context, opts *address.CreationOptions) (string, error) {
 	arg := sqlcdb.CreateAddressParams{
 		ID:            uuid.NewString(),

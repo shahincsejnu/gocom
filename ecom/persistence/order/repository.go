@@ -16,10 +16,6 @@ func NewRepository(db *sqlcdb.Queries) *Repository {
 	return &Repository{DB: db}
 }
 
-func (r *Repository) GetList(ctx context.Context, userID string) ([]sqlcdb.Order, error) {
-	return r.DB.GetOrdersByUser(ctx, userID)
-}
-
 func (r *Repository) GetOne(ctx context.Context, orderID string) (*sqlcdb.Order, error) {
 	ord, err := r.DB.GetOrderById(ctx, orderID)
 	if err != nil {

@@ -22,3 +22,11 @@ func (r *Repository) GetById(ctx context.Context, id string) (*sqlcdb.User, erro
 
 	return &user, nil
 }
+
+func (r *Repository) GetOrdersList(ctx context.Context, userID string) ([]sqlcdb.Order, error) {
+	return r.DB.GetOrdersByUser(ctx, userID)
+}
+
+func (r *Repository) GetAddressesList(ctx context.Context, userID string) ([]sqlcdb.Address, error) {
+	return r.DB.GetAddressesByUser(ctx, userID)
+}
