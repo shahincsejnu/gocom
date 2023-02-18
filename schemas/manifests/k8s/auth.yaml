@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gocom-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gocomauth
+  template:
+    metadata:
+      labels:
+        app: gocomauth
+    spec:
+      containers:
+      - name: auth
+        imagePullPolicy: Always
+        image: shahincsejnu/gocom-auth:a7a4b0a
+        ports:
+        - containerPort: 8080
+        env:
+          - name: DATABASE_URL
+            value: postgresql://gocom:gocom123@postgres-service:5432/gocomdb?sslmode=disable
+          - name: SECRET_KEY
+            value: supersecretkey123
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: gocomauth
