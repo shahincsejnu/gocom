@@ -10,6 +10,21 @@ In this `gocom` monorepo we'll demonstrate Golang based microservices following 
     - SQLC queries
     - code generations
 
+## Tech Stack & Tools
+- Golang
+- Gin Framework
+- Ginkgo
+- Gomega
+- Golang Mockgen
+- PostgreSQL
+- SQLC
+- Golang Migrate
+- Docker
+- Kubernetes
+- GH Actions
+- ArgoCD
+- OpenAPI Schema
+
 ## How to run this project locally?
 - clone this repo & go to the root directory (`cd ~/<>/gocom`)
 - `docker compose up`:
@@ -27,3 +42,11 @@ In this `gocom` monorepo we'll demonstrate Golang based microservices following 
 - `export POSTGRESQL_URL='postgresql://gocom:gocom123@localhost:5432/gocomdb?sslmode=disable'` 
 - `migrate -database $POSTGRESQL_URL -path db/migrations up` : apply the migrations files
 - [🎉] now the projects setup is successful, for checking the API endpoints of each service pls have a look into each service's README.md file and test those endpoints from `postman` or etc.
+
+## Auth Service's RESTful API Endpoints
+- check [here](./auth/openapi.yaml) for OpenAPI schema of auth service's api endpoints
+- also look into the [examples](./auth/README.md)
+
+## Ecom Service's RESTful API Endpoints
+- check [here](./ecom/openapi.yaml) for OpenAPI schema of ecom service's api endpoints
+- also look into the [examples](./ecom/README.md)
