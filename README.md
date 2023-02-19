@@ -43,6 +43,9 @@ In this `gocom` monorepo we'll demonstrate Golang based microservices following 
 - `migrate -database $POSTGRESQL_URL -path db/migrations up` : apply the migrations files
 - [🎉] now the projects setup is successful, for checking the API endpoints of each service pls have a look into each service's README.md file and test those endpoints from `postman` or etc.
 
+## How to deploy `gocom` to a K8s cluster?
+- follow the details from [here](./schemas/manifests/)
+
 ## Auth Service's RESTful API Endpoints
 - check [here](./auth/openapi.yaml) for OpenAPI schema of auth service's api endpoints
 - also look into the [examples](./auth/README.md)
