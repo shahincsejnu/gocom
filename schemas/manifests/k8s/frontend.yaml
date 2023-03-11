@@ -15,7 +15,7 @@ spec:
       containers:
       - name: fe
         imagePullPolicy: Always
-        image: shahincsejnu/gocom-frontend:1e0290f
+        image: shahincsejnu/gocom-frontend:b5ac408
         ports:
         - containerPort: 3000
 ---
