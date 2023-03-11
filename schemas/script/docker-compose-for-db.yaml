@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: gocom
+      POSTGRES_PASSWORD: gocom123
+      POSTGRES_DB: gocomdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
