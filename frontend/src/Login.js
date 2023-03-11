@@ -9,7 +9,7 @@ function Login() {
     const err = 'Could not logged in';
     // handle signup logic here
     // Send POST request to /login endpoint
-    fetch("http://localhost:8084/login", {
+    fetch("http://auth-service.default.svc:8080/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

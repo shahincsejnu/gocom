@@ -8,7 +8,7 @@ function Signup() {
   const handleSubmit = (event) => {
     // handle signup logic here
     // Send POST request to /signup endpoint
-    fetch("http://localhost:8084/signup", {
+    fetch("http://auth-service.default.svc:8080/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

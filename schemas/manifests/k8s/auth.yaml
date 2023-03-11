@@ -39,7 +39,7 @@ spec:
         - containerPort: 8080
         env:
           - name: DATABASE_URL
-            value: postgresql://gocom:gocom123@postgres-service:5432/gocomdb?sslmode=disable
+            value: postgresql://gocom:gocom123@10.0.0.15:5432/gocomdb?sslmode=disable
           - name: SECRET_KEY
             value: supersecretkey123
 ---
