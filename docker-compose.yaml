@@ -37,3 +37,13 @@ services:
       DATABASE_URL: postgresql://gocom:gocom123@gocomdb:5432/gocomdb?sslmode=disable
     depends_on:
       - db
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: docker/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - db
