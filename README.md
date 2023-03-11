@@ -4,6 +4,7 @@ In this `gocom` monorepo we'll demonstrate Golang based microservices following 
 ## This monorepo's structure
 * [auth](./auth/README.md) : Auth service which have all the endpoints related to authn/authz.
 * [ecom](./ecom/README.md) : ecom service which have all the endpoints to do CRUD operations for a ecommerce site.
+* [frontend](./frontend/README.md) : frontend service which connect to the BE services
 * [schemas](./schemas/README.md) :
     - DB migrations
     - DB schemas
