@@ -1,36 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gocom-ecom
+  name: gocom-fe
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gocomecom
+      app: gocomfe
   template:
     metadata:
       labels:
-        app: gocomecom
+        app: gocomfe
     spec:
       containers:
-      - name: ecom
+      - name: fe
         imagePullPolicy: Always
-        image: shahincsejnu/gocom-ecom:1e0290f
+        image: shahincsejnu/gocom-frontend:1e0290f
         ports:
         - containerPort: 8080
-        env:
-          - name: DATABASE_URL
-            value: postgresql://gocom:gocom123@postgres-service:5432/gocomdb?sslmode=disable
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: ecom-service
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - port: 80
     protocol: TCP
     targetPort: 8080
   selector:
-    app: gocomecom
+    app: gocomfe

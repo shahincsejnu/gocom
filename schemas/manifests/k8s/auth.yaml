@@ -15,7 +15,7 @@ spec:
       containers:
       - name: auth
         imagePullPolicy: Always
-        image: shahincsejnu/gocom-auth:a7a4b0a
+        image: shahincsejnu/gocom-auth:1e0290f
         ports:
         - containerPort: 8080
         env:
